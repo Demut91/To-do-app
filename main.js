@@ -1,39 +1,53 @@
 class Task {
-    text = ''
-    done = false
+  text = '';
+  done = false;
+  element = null;
 
-    constructor (text) {
-    this.text = text 
+  constructor (text) {
+    this.text = text;
+  }
+
+  render () {
+    if (!this.element) {
+      this.element = document.createElement ('div');
     }
 
-    render () {
-        const place = document.querySelector ('.block-todo')
-        const element = document.createElement('div')
-        element.classList = 'task'
-        element.innerHTML = this.text
-        place.appendChild(element)
-        
-    }
+    this.element.classList = 'task';
+    this.element.innerHTML = this.text;
 
-    createButton () {
-        const btn = document.createElement('button')
-        btn.classList = 'button'
-        btn.innerHTML = 'Done!'
-        const btnPlace = document.querySelector('.task')
-        btnPlace.appendChild(btn)
+    let place = null;
+    if (this.done) {
+      place = document.querySelector ('.block-done');
+    } else {
+      place = document.querySelector ('.block-todo');
+      this.element.appendChild (this.createButton ());
     }
+    place.appendChild (this.element);
+  }
 
+  createButton () {
+    const btn = document.createElement ('button');
+    btn.classList = 'button';
+    btn.innerHTML = '&#10004; DONE';
+
+    btn.addEventListener ('click', this.clickedButton.bind (this));
+
+    return btn;
+  }
+
+  clickedButton () {
+    this.done = true;
+    this.render ();
+  }
 }
 
+const form = document.querySelector ('form');
+form.addEventListener ('submit', function () {
+  event.preventDefault ();
 
-
-const form = document.querySelector('form')
-form.addEventListener('submit', function () {    
-    event.preventDefault()
-
-    const input = document.querySelector('input')
-    const newTask = new Task(input.value)
-    newTask.render()
-    newTask.createButton()
-    input.value = ''
-})
+  const input = document.querySelector ('input');
+  let newTask = new Task (input.value);
+  newTask.render ();
+  newTask.createButton ();
+  input.value = '';
+});

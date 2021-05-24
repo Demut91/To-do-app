@@ -4,12 +4,13 @@ body {
 }
 
 form {
-    margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 5%;
 }
 
 .title {
@@ -43,8 +44,8 @@ form {
   background-color: blanchedalmond;
   border: 1px solid black;
   border-radius: 5px;
-  width: 300px;
-  padding: 0 20px;
+  min-width: 300px;
+  padding: 0 20px 10px 20px;
   box-shadow: 0 0 5px white;
   min-height: 150px;
 }
@@ -66,8 +67,24 @@ form {
   background-color: lightgreen;
 }
 .task {
+  display: flex;
+  justify-content: space-between;
   font-size: 20px;
   margin-top: 20px;
   margin-bottom: 25px;
   border-bottom: 1px solid gray;
+}
+
+.button {
+  font-size: 15px;
+  background-color: transparent;
+  padding: 4px 10px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-top: -3px;
+}
+.button:hover {
+  box-shadow: 0 0 5px black;
+  cursor: pointer;
 }
